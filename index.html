@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ghosty</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-theme="dark" data-panel="closed" data-blur="off">
+    <div class="app">
+      <div class="chrome" id="chrome">
+        <header class="topbar">
+          <div class="brand" aria-label="Ghosty">
+            <span class="mark" aria-hidden="true"></span>
+            <span class="name">ghosty</span>
+          </div>
+
+          <div class="nav" aria-label="Навигация">
+            <button class="icon-button" id="back" title="Назад">
+              <span aria-hidden="true">←</span>
+            </button>
+            <button class="icon-button" id="forward" title="Вперёд">
+              <span aria-hidden="true">→</span>
+            </button>
+            <button class="icon-button" id="reload" title="Обновить">
+              <span aria-hidden="true">⟳</span>
+            </button>
+            <button class="icon-button" id="home" title="Домой">
+              <span aria-hidden="true">⌂</span>
+            </button>
+          </div>
+
+          <label class="omnibox" aria-label="Адресная строка">
+            <span class="sr-only">Адрес или запрос</span>
+            <input
+              id="address"
+              type="text"
+              spellcheck="false"
+              autocomplete="off"
+              placeholder="Введите адрес или запрос"
+            />
+            <span class="omnibox-hint" id="omnibox-hint">DuckDuckGo</span>
+          </label>
+
+          <div class="actions">
+            <button class="icon-button" id="bookmark" title="В закладки">
+              <span aria-hidden="true">☆</span>
+            </button>
+            <button class="icon-button" id="new-tab" title="Новая вкладка">
+              <span aria-hidden="true">＋</span>
+            </button>
+            <button class="ghost-button" id="settings-toggle" title="Настройки">
+              Настройки
+            </button>
+          </div>
+        </header>
+
+        <nav class="tabs" id="tabs" aria-label="Вкладки"></nav>
+      </div>
+
+      <aside class="panel" id="settings-panel" aria-hidden="true">
+        <div class="panel-resizer" id="panel-resizer" aria-hidden="true"></div>
+        <div class="panel-content">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Настройки</div>
+              <div class="panel-subtitle">Приватность, вкладки, визуальные эффекты</div>
+            </div>
+            <button class="icon-button" id="settings-close" title="Закрыть">
+              <span aria-hidden="true">✕</span>
+            </button>
+          </div>
+
+          <div class="panel-section">
+            <div class="section-title">Внешний вид</div>
+            <label class="field">
+              <span class="field-label">Тема</span>
+              <div class="segmented" role="group" aria-label="Тема">
+                <button type="button" class="segment" data-theme="dark">Тёмная</button>
+                <button type="button" class="segment" data-theme="light">Светлая</button>
+              </div>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="panel-pin-toggle" />
+              <span class="toggle-track" aria-hidden="true"></span>
+              <span class="toggle-label">Боковая панель</span>
+            </label>
+            <div class="section-hint">
+              Панель закрепится справа, её ширину можно менять перетаскиванием края.
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="blur-toggle" />
+              <span class="toggle-track" aria-hidden="true"></span>
+              <span class="toggle-label">Blur (стекло)</span>
+            </label>
+          </div>
+
+          <div class="panel-section">
+            <div class="section-title">Приватность</div>
+            <label class="toggle">
+              <input type="checkbox" id="anon-toggle" />
+              <span class="toggle-track" aria-hidden="true"></span>
+              <span class="toggle-label">Анонимный режим</span>
+            </label>
+            <div class="section-hint" id="anon-hint">
+              В анонимном режиме история, закладки и кеш не сохраняются.
+            </div>
+          </div>
+
+          <div class="panel-section">
+            <div class="section-title">Поиск и вкладки</div>
+            <label class="field">
+              <span class="field-label">Поисковик по умолчанию</span>
+              <select id="engine"></select>
+            </label>
+            <label class="field">
+              <span class="field-label">Новая вкладка</span>
+              <select id="newtab-mode">
+                <option value="engine">Страница поисковика</option>
+                <option value="blank">Пустая</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="panel-section">
+            <div class="section-title">История</div>
+            <div class="list" id="history-list"></div>
+            <button class="ghost-button" id="history-open">Открыть about:history</button>
+            <button class="ghost-button" id="history-clear">Очистить историю</button>
+          </div>
+
+          <div class="panel-section">
+            <div class="section-title">Закладки</div>
+            <div class="list" id="bookmarks-list"></div>
+            <button class="ghost-button" id="bookmarks-clear">Очистить закладки</button>
+          </div>
+
+          <div class="panel-section">
+            <div class="section-title">Загрузки</div>
+            <div class="list" id="downloads-list"></div>
+          </div>
+
+          <div class="panel-footer">
+            <div>Ctrl/Cmd + L — фокус на адресной строке</div>
+            <div>Ctrl/Cmd + T — новая вкладка</div>
+            <div>Ctrl/Cmd + W — закрыть вкладку</div>
+            <div>Ctrl/Cmd + Tab — следующая вкладка</div>
+          </div>
+        </div>
+      </aside>
+
+      <div class="status" id="status" aria-live="polite"></div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

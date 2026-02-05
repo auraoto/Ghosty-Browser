@@ -1,0 +1,27 @@
+{
+  "name": "ghosty",
+  "version": "0.1.0",
+  "description": "Minimalist black & white browser with tabs and search engine switching.",
+  "main": "main.js",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "dist": "electron-builder --linux"
+  },
+  "devDependencies": {
+    "electron": "^28.3.3",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.ghosty.browser",
+    "productName": "Ghosty",
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Network"
+    }
+  }
+}
